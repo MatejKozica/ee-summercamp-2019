@@ -5,7 +5,7 @@ import Cards from "./components/cards/cards";
 
 const API = "http://api.apixu.com/v1/forecast.json?";
 const APIKEY = "key=034d5383f82147bdad391238192905";
-const DAYS = "&days=3";
+const DAYS = "&days=5";
 const LOCATION = "&q=";
 
 class App extends Component {

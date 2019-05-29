@@ -1,17 +1,30 @@
 .card {
-  width: 250px;
-  height: 300px;
-  background-color: white;
-  border: solid 4px #4caf50;
+  width: 200px;
+  height: 250px;
+  background-color: transparent;
+  border: solid 2px white;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   transition: ease-in-out 0.4s;
+  opacity: 0%;
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
 }
 
 h1 {
-  font-family: "Roboto", sans-serif;
-  color: #4caf50;
+  font-family: "Myriad Pro Regular";
+  color: white;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
