@@ -1,26 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import SearchBar from "./components/searchBar/SearchBar";
+import Cards from "./components/cards/cards";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const API = "http://api.apixu.com/v1/forecast.json?";
+const APIKEY = "key=034d5383f82147bdad391238192905";
+const DAYS = "&days=3";
+const LOCATION = "&q=";
+
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      search: "",
+      forecastDay: []
+    };
+
+    this.fetchData = this.fetchData.bind(this);
+  }
+
+  fetchData = city => {
+    fetch(API + APIKEY + LOCATION + city + DAYS)
+      .then(res => res.json())
+      .then(data =>
+        this.setState({
+          forecastDay: data.forecast.forecastday
+        })
+      );
+  };
+
+  updateStateOnSearch = e => {
+    this.setState({ search: e.target.value });
+  };
+
+  render() {
+    return (
+      <div className="app">
+        <SearchBar
+          value={this.state.search}
+          onChange={this.updateStateOnSearch.bind(this)}
+          onClick={() => this.fetchData(this.state.search)}
+        />
+        <div className="days-container">
+          <Cards data={this.state.forecastDay} />
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
