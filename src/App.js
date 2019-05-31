@@ -24,7 +24,9 @@ class App extends Component {
       .then(res => res.json())
       .then(data =>
         this.setState({
-          forecastDay: data.forecast.forecastday
+          forecastDay: data
+             ? data.forecast.forecastday
+             : []
         })
       );
   };
